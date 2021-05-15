@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang = "en" >
+<head >
+    <meta charset = "UTF-8" >
+    <meta name = "viewport"
+          content = "width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0" >
+    <meta http-equiv = "X-UA-Compatible" content = "ie=edge" >
+    <title >我的朋友</title >
+    <style >
+        .tableData {
+            width: 800px;
+            height: 500px;
+            text-align: center;
+            color: #343a40;
+            border-collapse: collapse;
+            border-spacing: 0;
+            margin: 0 auto;
+        }
+        .tableData thead {
+            background-color: skyblue;
+        }
+        .tableData thead td,
+        .tableData tbody td {
+            border: 1px solid #ccc;
+        }
+        .tableData tbody tr:hover {
+            background-color: hotpink;
+        }
+    </style >
+</head >
+<body >
+<!--    <h1>我自闭了</h1>-->
+    <table class="tableData">
+        <thead>
+            <tr>
+                <td>id</td><td>姓名</td><td> 性别 </td><td> 生日 </td><td>类型</td>
+            </tr>
+        </thead>
+        <tbody id="tbody">
+            <tr></tr>
+        </tbody>
+    </table>
+</body >
+<!--<script  src="../layui-master/dist/jquery.min.js"></script >-->
+<script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+<script >
+    $.ajax({
+        type: 'get',
+        url: '/getUser',
+        success: function (res) {
+            console.log(res)
+            var html = '';
+            for (var i = 0; i< res.length; i++) {
+              html += '<tr><td>'+res[i].id+'</td><td>'+res[i].name+'</td><td>'+res[i].sex+'</td><td>'+res[i].birthday+'</td><td>'+res[i].type+'</td></tr>'
+            }
+            $('#tbody').html(html);
+        }
+    })
+</script >
+</html >

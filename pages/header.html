@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang = "en" >
+<head >
+    <meta charset = "UTF-8" >
+    <title ><%= title%></title >
+    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/layui/css/layui.css">
+</head >
+<body >
+        <div class="header">
+            <div class="layui-container">
+                <div class="layui-row">
+                    <div class="layui-col-md1" >
+                        <img src="static/imgs/logo.jpg" alt="" srcset="">
+                    </div>
+                    <div class="layui-col-md4">
+                        <div class="layui-tab">
+                            <ul class="layui-tab-title">
+                                <!--<li class="layui-this" onclick='window.open("/userInfo")'>个人资料</li>-->
+                                <li onclick='window.open("/getUserMain")'>我的朋友</li>
+                                <li onclick='window.open("/toRegister")'>注册账户</li>
+                                <li onclick='window.open("/toLogin")'>登入账户</li>
+                                <li onclick='window.open("/toAdmin")'>后台管理</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+</body >
+</html >

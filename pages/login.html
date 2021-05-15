@@ -1,0 +1,33 @@
+<% include header.html%>
+    <div class="login">
+        <div class="box">
+            <h2>用户登录</h2>
+            <form>
+                <div class="inputBox">
+                    <input id="userNname" type="text" name="" required="">
+                    <label>用户名</label>
+                </div>
+                <div class="inputBox">
+                    <input id="password" type="password" name="" required="">
+                    <label>密码</label>
+                </div>
+                <input type="button" onclick="denglu()" name="" value="登录">
+            </form>
+        </div>
+    </div>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+    <script>
+        function denglu () {
+            $.ajax({
+                type: 'get',
+                url: '/login?userNname=' + document.querySelector('#userNname').value + '&password=' + document.querySelector('#password').value,
+                success: function (res) {
+                    if (res.length > 0) {
+                        alert('登录成功!')
+                        window.location.href="/toAdmin"
+                    }
+                }
+            })
+        }
+    </script>
+<% include footer.html%>
