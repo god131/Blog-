@@ -1,0 +1,191 @@
+@charset "utf-8";
+/*header*/
+.header img{
+    width: 93px;
+    position: absolute;
+    top: -15px;
+    left: -109px;
+}
+/*index*/
+
+.index  .twitter {
+&:hover {
+a {
+    transform: rotate(-45deg) scale(1.05);
+}
+
+i {
+    color: lighten(#00ACED, 10%);
+}
+}
+
+a {
+    bottom: -40px;
+    right: -75px;
+    transform: rotate(-45deg);
+}
+
+i {
+    bottom: 7px;
+    right: 7px;
+    color: #00ACED;
+}
+}
+
+.social-icon {
+a {
+    position: absolute;
+    background: white;
+    color: white;
+    box-shadow: -1px -1px 20px 0px rgba(0,0,0,0.30);
+    display: inline-block;
+    width: 150px;
+    height: 80px;
+    transform-origin: 50% 50%;
+    transition: .15s ease-out;
+}
+
+i {
+    position: absolute;
+    pointer-events: none;
+    z-index: 1000;
+    transition: .15s ease-out;
+}
+}
+
+.index   .youtube {
+&:hover {
+a {
+    transform: rotate(45deg) scale(1.05);
+}
+
+i {
+    color: lighten(#E62117, 10%);
+}
+}
+
+a {
+    bottom: -40px;
+    left: -75px;
+    transform: rotate(45deg);
+}
+
+i {
+    bottom: 7px;
+    left: 7px;
+    color: #E62117;
+}
+}
+
+
+
+
+
+
+/*login s*/
+
+
+/*.login{
+    background: url("static/imgs/login-bg.jpg");
+    padding-top: 75px;
+    padding-bottom: 75px;
+}
+
+.login .log-box{
+    height: 341px;
+    width: 570px;
+    margin: 0px auto;
+    background-color: #00FF00;
+}*/
+
+body{
+    margin:0;
+    padding: 0;
+    font-family: sans-serif;
+    background: url("../imgs/login-bg.jpg");
+    background-size: cover;
+}
+.box
+{
+    position: absolute;
+    top: 333px;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    width:400px;
+    padding: 40px;
+    background:rgba(0,0,0,.8);
+    box-sizing:border-box;
+    box-shadow:0 15px 25px rgba(0,0,0,.5);
+    border-radius: 10px;/*!*登录窗口边角圆滑*!*/
+}
+.box h2
+{
+    margin:0 0 30px;
+    padding:0;
+    color:#fff;
+    text-align:center;
+}
+.box .inputBox
+{
+    position:relative;
+}
+.box .inputBox input
+{
+    width: 100%;
+    padding: 10px 0;
+    font-side:16px;
+    color: #fff;
+    letter-spacing: 1px;
+    margin-bottom:30px;!*输入框设置*!
+    border:none;
+    border-bottom:1px solid #fff;
+    outline:none;
+    background:transparent;
+}
+.box .inputBox label
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 10px 0;
+    font-size: 16px;
+    color: #fff;
+    pointer-events: none;
+    transition: .5s;
+}
+.box .inputBox input:focus ~ label,
+.box .inputBox input:valid ~ label
+{
+    top: -18px;
+    left: 0;
+    color: #03a9f4;
+    font-size: 12px;
+}
+.box  input[type="submit"]
+{
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    background: #03a9f4;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+
+.login {
+    min-height: 600px;
+}
+
+/*login e*/
+
+/*footer*/
+.footer {
+    color: #4E5465;
+    line-height: 24px;
+    text-align: center;
+}
+.footer a{
+    color: #4E5465;
+}
