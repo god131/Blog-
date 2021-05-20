@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang = "en" >
+<head >
+    <meta charset = "UTF-8" >
+    <title >后台管理</title >
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+</head >
+<style >
+    .tableData {
+        width: 800px;
+        text-align: center;
+        color: #343a40;
+        border-collapse: collapse;
+        border-spacing: 0;
+        margin: 0 auto;
+    }
+    .tableData thead {
+        background-color: skyblue;
+    }
+    .tableData thead td,
+    .tableData tbody td {
+        border: 1px solid #ccc;
+    }
+    .tableData tbody tr:hover {
+        background-color: hotpink;
+    }
+    body{
+        background:url(../static/imgs/desert.jpg);
+    }
+    .search-bar, .page-bar, h3 {
+        width: 800px;
+        display: flex;
+        justify-content: flex-end;
+        margin: 5px auto;
+    }
+    .tool-box {
+        display: flex;
+    }
+    .tool-box button {
+        width: 60px;
+        margin: 0 10px;
+    }
+    td input {
+        background-color: transparent;
+        border: none;
+    }
+</style >
+<body >
+<table class="tableData">
+    <h3>搜索</h3>
+    <div class="search-bar">
+        <input id="name" type="text">
+        <button onclick="search()">根据姓名查询</button>
+    </div>
+    <h3>页面跳转</h3>
+    <div class="page-bar">
+        <input id="page" type="text" value="1">
+        <button onclick="getData()">跳转</button>
+    </div>
+    <tbody id="tbody">
+    <tr><td>id</td><td>用户名</td><td>密码</td></tr>
+    </tbody>
+</table>
+
+</body >
+<script >
+    function getData () {
+        $.ajax({
+            type: 'get',
+            url: '/getUser2?page=' + document.querySelector('#page').value,
+            success: function (res) {
+                console.log(res)
+                var html = '<tr><td>id</td><td>用户名</td><td>密码</td></tr>';
+                for (var i = 0; i< res.length; i++) {
+                  html += `<tr><td>${res[i].id}</td><td>${res[i].username}</td><td>${res[i].password}</td></tr>`
+                }
+                $('#tbody').html(html);
+            }
+        })
+    }
+    function getUser () {
+      $.ajax({
+        type: 'get',
+        url: '/getUser2?page=' + document.querySelector('#page').value,
+        success: function (res) {
+          console.log(res)
+          var html = '';
+          for (var i = 0; i< res.length; i++) {
+            html += `<tr><td class="id">`+res[i].id+`</td><td>`+`<input onchange="saveInfo('name', ${res[i].id}, this)" value="${res[i].name}">`+'</td><td>'+`<input onchange="saveInfo('password', ${res[i].id}, this)" value="${res[i].password}">`+'</td><td class="tool-box"><button onclick="deleteItem(' + res[i].id + `)">删除</button><button onclick="alert('修改成功')">修改</button></td></tr>`
+          }
+          html += `<tr><td></td><td><input class="add-input" type="text"></td><td><input class="add-input" type="text"></td><td><input class="add-input" type="text"></td><td class="tool-box"><button onclick="addNew()">添加</button></td>`
+          $('#tbody').html(html);
+        }
+      })
+    }
+    getData()
+    function deleteItem (id) {
+        $.ajax({
+            type: 'get',
+            url: '/deleteUser?id=' + id,
+            success: function (res) {
+                getData()
+            }
+        })
+    }
+    // 搜索用户
+    function search () {
+        $.ajax({
+            type: 'get',
+            url: '/searchUser?name=' + document.querySelector('#name').value,
+            success: function (res) {
+                console.log(res)
+                var html = '';
+                for (var i = 0; i< res.length; i++) {
+                    html += '<tr><td>'+res[i].id+'</td><td>'+res[i].name+'</td><td>'+res[i].sex+ `</td><td><input onchange="saveInfo('birthday', ${res[i].id}, this)" value="`+res[i].birthday+'"></td><td>'+res[i].type+'</td><td><button onclick="deleteItem(' + res[i].id + ')">删除</button></td></tr>'
+                }
+                html += `<tr><td></td><td><input class="add-input" type="text"></td><td><input class="add-input" type="text"></td><td><input class="add-input" type="text"></td><td><input class="add-input" type="text"></td><td><button onclick="addNew()">添加</button></td>`
+                $('#tbody').html(html);
+            }
+        })
+    }
+    function saveInfo (name, id, target) {
+        console.log(target.value)
+        $.ajax({
+            type: 'get',
+            url: `/saveInfo?id=${id}&name=${name}&value=${encodeURI(target.value)}`,
+            success: function (res) {
+                getData()
+            }
+        })
+    }
+    function addNew () {
+        var valueList = document.querySelectorAll('.add-input')
+        $.ajax({
+            type: 'get',
+            url: `/addInfo?name=${valueList[0].value}&sex=${valueList[1].value}&birthday=${encodeURI(valueList[2].value)}&type=${encodeURI(valueList[3].value)}`,
+            success: function (res) {
+                getData()
+            }
+        })
+    }
+</script>
+
+</html>

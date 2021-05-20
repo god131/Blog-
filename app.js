@@ -53,7 +53,13 @@ app.get('/toAdmin',(res,resp)=> {
   resp.render ('admin', {
     title: '后台管理'
   })
+})
+
+app.get('/toUser',(res,resp)=> {
+  resp.render ('user', {
+    title: '后台管理'
   })
+})
   /*//个人中心
   app.get('/useInfo',(req,res)=>{
     res.render('useInfo',{
@@ -85,6 +91,17 @@ app.get('/toAdmin',(res,resp)=> {
       res.send (res1)
     })
   })
+app.get ('/getUser2', (req, res) => {
+  let sql = `select * from friends`;
+  if (req.query.page) {
+    sql = `select * from user limit ${(req.query.page - 1) * 10}, 10`;
+  }
+  console.log (sql)
+  db (sql, null,).then (res1 => {
+    console.log(res1)
+    res.send (res1)
+  })
+})
   // 注册
   app.get ('/register', (req, res) => {
     const sql = 'INSERT INTO user (`username`, `password`) VALUES ' + `('${req.query.userName}', '${req.query.password}');`
