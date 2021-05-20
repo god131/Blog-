@@ -57,20 +57,22 @@
         <td>id</td><td>姓名</td><td> 性别 </td><td> 生日 </td><td>类型</td><td>操作</td>
     </tr>
     </thead>
-    <tbody id="tbody">
-        <tr><td>用户名</td><td>密码</td></tr>
-    </tbody>
     <h3>页面跳转</h3>
     <div class="page-bar">
         <input id="page" type="text" value="1">
         <button onclick="getData()">跳转</button>
     </div>
+    <tbody id="tbody">
+    <tr><td>id</td><td>用户名</td><td>密码</td></tr>
+    </tbody>
+    <tbody id="tbody2">
+    <tr><td>id</td><td>用户名</td><td>密码</td></tr>
+    </tbody>
 </table>
 
 </body >
 <script >
     function getData () {
-        
         $.ajax({
             type: 'get',
             url: '/getUser?page=' + document.querySelector('#page').value,
@@ -84,6 +86,33 @@
                 $('#tbody').html(html);
             }
         })
+      $.ajax({
+        type: 'get',
+        url: '/getUser2?page=' + document.querySelector('#page').value,
+        success: function (res) {
+          console.log(res)
+          var html = '<tr><th>id</th><td>用户名</td><td>密码</td></tr>';
+          for (var i = 0; i< res.length; i++) {
+            html += `<tr><td>${res[i].id}</td><td>${res[i].username}</td><td>${res[i].password}</td></tr>`
+          }
+          $('#tbody2').html(html);
+        }
+      })
+    }
+    function getUser () {
+      $.ajax({
+        type: 'get',
+        url: '/getUser?page=' + document.querySelector('#page').value,
+        success: function (res) {
+          console.log(res)
+          var html = '';
+          for (var i = 0; i< res.length; i++) {
+            html += `<tr><td class="id">`+res[i].id+`</td><td>`+`<input onchange="saveInfo('name', ${res[i].id}, this)" value="${res[i].name}">`+'</td><td>'+`<input onchange="saveInfo('password', ${res[i].id}, this)" value="${res[i].password}">`+'</td><td class="tool-box"><button onclick="deleteItem(' + res[i].id + `)">删除</button><button onclick="alert('修改成功')">修改</button></td></tr>`
+          }
+          html += `<tr><td></td><td><input class="add-input" type="text"></td><td><input class="add-input" type="text"></td><td><input class="add-input" type="text"></td><td class="tool-box"><button onclick="addNew()">添加</button></td>`
+          $('#tbody').html(html);
+        }
+      })
     }
     getData()
     function deleteItem (id) {
