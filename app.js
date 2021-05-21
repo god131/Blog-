@@ -133,6 +133,14 @@ app.get ('/getUser2', (req, res) => {
       res.send (res1)
     })
   })
+// 删除用户
+app.get ('/deleteUser2', (req, res) => {
+  const sql = `DELETE FROM user WHERE id = ${req.query.id}`;
+  console.log (db)
+  db (sql, null,).then (res1 => {
+    res.send (res1)
+  })
+})
 //判断用户信息是否已经存在
   app.get ('/user/getUserPhone', async (req, resp) => {
     //调用该方法返回数据库数据
@@ -156,6 +164,14 @@ app.get ('/saveInfo', (req, res) => {
 
 app.get ('/addInfo', (req, res) => {
   const sql = `INSERT INTO friends (name, sex, birthday, type) VALUES (${decodeURI(req.query.name)}, ${decodeURI(req.query.sex)}, ${decodeURI(req.query.birthday)}, ${decodeURI(req.query.type)});`
+  console.log(sql)
+  db (sql, null,).then (res1 => {
+    res.send (res1)
+  })
+})
+
+app.get ('/addInfo2', (req, res) => {
+  const sql = `INSERT INTO user (username, password) VALUES (${decodeURI(req.query.username)}, ${decodeURI(req.query.password)});`
   console.log(sql)
   db (sql, null,).then (res1 => {
     res.send (res1)
