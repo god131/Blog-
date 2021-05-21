@@ -65,6 +65,9 @@
     <tbody id="tbody">
     <tr><td>id</td><td>用户名</td><td>密码</td></tr>
     </tbody>
+</table>
+
+<table class="tableData">
     <tbody id="tbody2">
     <tr><td>id</td><td>用户名</td><td>密码</td></tr>
     </tbody>
@@ -91,10 +94,11 @@
         url: '/getUser2?page=' + document.querySelector('#page').value,
         success: function (res) {
           console.log(res)
-          var html = '<tr><th>id</th><td>用户名</td><td>密码</td></tr>';
+          var html = '<tr><th>id</th><td>用户名</td><td>密码</td><td>操作</td></tr>';
           for (var i = 0; i< res.length; i++) {
-            html += `<tr><td>${res[i].id}</td><td>${res[i].username}</td><td>${res[i].password}</td></tr>`
+            html += `<tr><td>${res[i].id}</td><td>${res[i].username}</td><td>${res[i].password}</td><td class="tool-box"><button onclick="deleteItem2(${res[i].id})">删除</button><button onclick="alert('修改成功')" >修改</button></td></tr>`
           }
+          html += `<tr><td></td><td><input class="add-input-2" type="text"></td><td><input class="add-input-2" type="text"></td><td class="tool-box"><button onclick="addNew2()">添加</button></td>`
           $('#tbody2').html(html);
         }
       })
@@ -123,6 +127,15 @@
                 getData()
             }
         })
+    }
+    function deleteItem2 (id) {
+      $.ajax({
+        type: 'get',
+        url: '/deleteUser2?id=' + id,
+        success: function (res) {
+          getData()
+        }
+      })
     }
     // 搜索用户
     function search () {
@@ -159,6 +172,16 @@
                 getData()
             }
         })
+    }
+    function addNew2 () {
+      var valueList = document.querySelectorAll('.add-input-2')
+      $.ajax({
+        type: 'get',
+        url: `/addInfo2?username=${valueList[0].value}&password=${valueList[1].value}`,
+        success: function (res) {
+          getData()
+        }
+      })
     }
 </script>
 
