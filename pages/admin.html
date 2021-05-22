@@ -66,7 +66,16 @@
     <tr><td>id</td><td>用户名</td><td>密码</td></tr>
     </tbody>
 </table>
-
+<h3>搜索</h3>
+<div class="search-bar">
+    <input id="name2" type="text">
+    <button onclick="search2()">根据用户名查询</button>
+</div>
+<h3>页面跳转</h3>
+<div class="page-bar">
+    <input id="page2" type="text" value="1">
+    <button onclick="getData2()">跳转</button>
+</div>
 <table class="tableData">
     <tbody id="tbody2">
     <tr><td>id</td><td>用户名</td><td>密码</td></tr>
@@ -75,6 +84,7 @@
 
 </body >
 <script >
+  //分页
     function getData () {
         $.ajax({
             type: 'get',
@@ -85,10 +95,12 @@
                 for (var i = 0; i< res.length; i++) {
                     html += `<tr><td class="id">`+res[i].id+`</td><td>`+`<input onchange="saveInfo('name', ${res[i].id}, this)" value="${res[i].name}">`+'</td><td>'+`<input onchange="saveInfo('sex', ${res[i].id}, this)" value="${res[i].sex}">`+ `</td><td><input onchange="saveInfo('birthday', ${res[i].id}, this)" value="`+res[i].birthday+'"></td><td>'+`<input onchange="saveInfo('type', ${res[i].id}, this)" value="${res[i].type}">`+'</td><td class="tool-box"><button onclick="deleteItem(' + res[i].id + `)">删除</button><button onclick="alert('修改成功')">修改</button></td></tr>`
                 }
-                html += `<tr><td></td><td><input class="add-input" type="text"></td><td><input class="add-input" type="text"></td><td><input class="add-input" type="text"></td><td><input class="add-input" type="text"></td><td class="tool-box"><button onclick="addNew()">添加</button></td>`
+                html += `<tr><td></td><td><input class="add-input" type="text"></td><td><input class="add-input" type="text"></td><td><input class="add-input" type="text"></td><td><input class="add-input" type="text"></td><td class="tool-box"><button onclick="addNew()" >添加</button></td>`
                 $('#tbody').html(html);
             }
         })
+    }
+    function getData2 () {
       $.ajax({
         type: 'get',
         url: '/getUser2?page=' + document.querySelector('#page').value,
@@ -98,7 +110,7 @@
           for (var i = 0; i< res.length; i++) {
             html += `<tr><td>${res[i].id}</td><td>${res[i].username}</td><td>${res[i].password}</td><td class="tool-box"><button onclick="deleteItem2(${res[i].id})">删除</button><button onclick="alert('修改成功')" >修改</button></td></tr>`
           }
-          html += `<tr><td></td><td><input class="add-input-2" type="text"></td><td><input class="add-input-2" type="text"></td><td class="tool-box"><button onclick="addNew2()">添加</button></td>`
+          html += `<tr><td></td><td><input class="add-input-2" type="text"></td><td><input class="add-input-2" type="text"></td><td class="tool-box"><button onclick="addNew2()" >添加</button></td>`
           $('#tbody2').html(html);
         }
       })
@@ -128,12 +140,13 @@
             }
         })
     }
+    getData2()
     function deleteItem2 (id) {
       $.ajax({
         type: 'get',
         url: '/deleteUser2?id=' + id,
         success: function (res) {
-          getData()
+          getData2()
         }
       })
     }
@@ -153,15 +166,30 @@
             }
         })
     }
+    function search2 () {
+      $.ajax({
+        type: 'get',
+        url: '/searchUser2?name=' + document.querySelector('#name2').value,
+        success: function (res) {
+          console.log(res)
+          var html = '<tr><th>id</th><td>用户名</td><td>密码</td><td>操作</td></tr>';
+          for (var i = 0; i< res.length; i++) {
+            html += `<tr><td>${res[i].id}</td><td>${res[i].username}</td><td>${res[i].password}</td><td class="tool-box"><button onclick="deleteItem2(${res[i].id})">删除</button><button onclick="alert('修改成功')" >修改</button></td></tr>`
+          }
+          html += `<tr><td></td><td><input class="add-input-2" type="text"></td><td><input class="add-input-2" type="text"></td><td class="tool-box"><button onclick="addNew2()">添加</button></td>`
+          $('#tbody2').html(html);
+        }
+      })
+    }
     function saveInfo (name, id, target) {
-        console.log(target.value)
-        $.ajax({
-            type: 'get',
-            url: `/saveInfo?id=${id}&name=${name}&value=${encodeURI(target.value)}`,
-            success: function (res) {
-                getData()
-            }
-        })
+      console.log(target.value)
+      $.ajax({
+        type: 'get',
+        url: `/saveInfo?id=${id}&name=${name}&value=${encodeURI(target.value)}`,
+        success: function (res) {
+          getData()
+        }
+      })
     }
     function addNew () {
         var valueList = document.querySelectorAll('.add-input')
@@ -170,6 +198,7 @@
             url: `/addInfo?name=${valueList[0].value}&sex=${valueList[1].value}&birthday=${encodeURI(valueList[2].value)}&type=${encodeURI(valueList[3].value)}`,
             success: function (res) {
                 getData()
+                alert('添加成功')
             }
         })
     }
@@ -179,7 +208,8 @@
         type: 'get',
         url: `/addInfo2?username=${valueList[0].value}&password=${valueList[1].value}`,
         success: function (res) {
-          getData()
+          getData2()
+          alert('添加成功')
         }
       })
     }
