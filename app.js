@@ -92,7 +92,7 @@ app.get('/toUser',(res,resp)=> {
     })
   })
 app.get ('/getUser2', (req, res) => {
-  let sql = `select * from friends`;
+  let sql = `select * from user`;
   if (req.query.page) {
     sql = `select * from user limit ${(req.query.page - 1) * 10}, 10`;
   }
@@ -120,11 +120,17 @@ app.get ('/getUser2', (req, res) => {
   })
   // 根据名字搜索用户
   app.get ('/searchUser', (req, res) => {
-    const sql = `select*from friends WHERE name like '%${req.query.name}%'`;
+    const sql = `select * from friends WHERE name like '%${req.query.name}%'`;
     db (sql, null,).then (res1 => {
       res.send (res1)
     })
   })
+app.get ('/searchUser2', (req, res) => {
+  const sql = `select * from user WHERE username like '%${req.query.name}%'`;
+  db (sql, null,).then (res1 => {
+    res.send (res1)
+  })
+})
   // 删除用户
   app.get ('/deleteUser', (req, res) => {
     const sql = `DELETE FROM friends WHERE id = ${req.query.id}`;
@@ -156,6 +162,13 @@ app.get ('/deleteUser2', (req, res) => {
 // 修改数据
 app.get ('/saveInfo', (req, res) => {
   const sql = `UPDATE friends SET ${req.query.name} = '${decodeURI(req.query.value)}' WHERE id = ${req.query.id}`;
+  console.log(sql)
+  db (sql, null,).then (res1 => {
+    res.send (res1)
+  })
+})
+app.get ('/saveInfo2', (req, res) => {
+  const sql = `UPDATE user SET ${req.query.username} = '${decodeURI(req.query.value)}' WHERE id = ${req.query.id}`;
   console.log(sql)
   db (sql, null,).then (res1 => {
     res.send (res1)
