@@ -4,8 +4,24 @@
     <meta charset = "UTF-8" >
     <title >后台管理</title >
     <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+
 </head >
 <style >
+    input {
+        border-radius: 5px;
+        border-style:none;
+    }
+    button {
+        background-color: #4CAF50; /* Green */
+        border: none;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 8px;
+    }
     .tableData {
         width: 800px;
         text-align: center;
@@ -47,17 +63,17 @@
 </style >
 <body >
 <table class="tableData">
-    <h3>搜索</h3>
+    <!--<h3>搜索</h3>-->
     <div class="search-bar">
-        <input id="name" type="text">
-        <button onclick="search()">根据姓名查询</button>
+        <input placeholder="根据用户名查询" id="name" type="text">
+        <button onclick="search()">搜索</button>
     </div>
     <thead>
     <tr>
         <td>id</td><td>姓名</td><td> 性别 </td><td> 生日 </td><td>类型</td><td>操作</td>
     </tr>
     </thead>
-    <h3>页面跳转</h3>
+    <!--<h3>页面跳转</h3>-->
     <div class="page-bar">
         <input id="page" type="text" value="1">
         <button onclick="getData()">跳转</button>
@@ -66,12 +82,12 @@
     <tr><td>id</td><td>用户名</td><td>密码</td></tr>
     </tbody>
 </table>
-<h3>搜索</h3>
+<!--<h3>搜索</h3>-->
 <div class="search-bar">
-    <input id="name2" type="text">
-    <button onclick="search2()">根据用户名查询</button>
+    <input placeholder="根据用户名查询"  id="name2" type="text">
+    <button onclick="search2()">搜索</button>
 </div>
-<h3>页面跳转</h3>
+<!--<h3>页面跳转</h3>-->
 <div class="page-bar">
     <input id="page2" type="text" value="1">
     <button onclick="getData2()">跳转</button>
