@@ -54,12 +54,12 @@ app.get('/toAdmin',(res,resp)=> {
     title: '后台管理'
   })
 })
-
+/*
 app.get('/toUser',(res,resp)=> {
   resp.render ('user', {
     title: '后台管理'
   })
-})
+})*/
   /*//个人中心
   app.get('/useInfo',(req,res)=>{
     res.render('useInfo',{
