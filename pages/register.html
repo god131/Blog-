@@ -258,7 +258,7 @@
         // 校验自我介绍
         var introduceText = document.getElementById("introduceText");
         var introduce = introduceText.value;
-        if (introduce.length < 3 || uName.length > 60) {
+        if (introduce.length < 3 || uName.length > 50) {
             trip("introduce_trip", "长度为3-50字!!");
             return false;
         } else {
