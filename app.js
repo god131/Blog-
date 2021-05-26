@@ -34,6 +34,11 @@ app.get('/',(res,resp)=>{
     resp.end()
   })*/
 })
+app.get ('/getUserMain', (req, res) => {
+  res.render ('Data', {
+    tltle: '我的朋友'
+  })
+})
 //登入界面
 app.get('/toLogin', (req, res) =>{
   res.render('login',{
@@ -41,6 +46,17 @@ app.get('/toLogin', (req, res) =>{
   })
   /*const data = await util.read('pages/login.html')
   resp.end(data)*/
+})
+app.get('/toMine',(req,res)=>{
+  res.render('mine',{
+    title :'个人简介'
+  })
+})
+//评论回复
+app.get('/toSpeak',(req,res)=>{
+  res.render('speak',{
+    title :'论坛天地'
+  })
 })
 //注册界面
 app.get('/toRegister',(req,res)=>{
@@ -75,11 +91,6 @@ app.get('/toUser',(res,resp)=> {
   })*/
 
 //获取数据库
-  app.get ('/getUserMain', (req, res) => {
-    res.render ('Data', {
-      tltle: '我的朋友'
-    })
-  })
   app.get ('/getUser', (req, res) => {
     let sql = `select * from friends`;
 	if (req.query.page) {
@@ -208,14 +219,14 @@ var config = {
     database : config.dataBase.name
   });
   connection.connect ();
-// 解决跨域访问
+/*// 解决跨域访问
   app.all ('/', function (req, res, next) {
     res.setHeader ('Access-Control-Allow-Origin', '*');
     res.setHeader ('Access-Control-Allow-Methods', 'GET, POST');
     res.setHeader ('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
     next ();
-  });
-
+  });*/
+/*
   app.post ('/', urlencodedParser, function (req, res) {
     // console.log(req);
     var name = req.body.name;
@@ -249,7 +260,7 @@ var config = {
       }
     })
     res.end ('请求成功');
-  });
+  });*/
 //监听服务端端口
   app.listen (3000, () => {
     /*  var host = server.address().address
