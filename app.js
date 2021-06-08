@@ -7,7 +7,7 @@ const user = require('./manage/user');
 const path = require('path');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
-var urlencodedParser = bodyParser.urlencoded({ extended: false });// 创建 application/x-www-form-urlencode
+/*var urlencodedParser = bodyParser.urlencoded({ extended: false });// 创建 application/x-www-form-urlencode*/
 
 
 
