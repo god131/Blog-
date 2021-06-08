@@ -7,11 +7,8 @@ const user = require('./manage/user');
 const path = require('path');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
-/*var urlencodedParser = bodyParser.urlencoded({ extended: false });// 创建 application/x-www-form-urlencode*/
 
 
-
-/*module.exports = router;//设置静态资源路径*/
 app.use('/static',express.static(__dirname+'/static'));
 //引入ejs
 app.engine('.html',require('ejs').__express);
@@ -45,18 +42,6 @@ app.get('/', (req, res) =>{
     title:"登入界面"
   })
 })
-
-/*app.post('/index', (req, res)=>{
-  var sql = 'SELECT * FROM user where username  = '+req.body.username+'and password = '+req.body.password+''
-  connection.query(sql,function (err, result) {
-    if(err){
-      console.log('[SELECT ERROR] - ',err.message);
-      return;
-    }else {
-        res.json({"s":1})
-    }
-  })
-})*/
 app.get('/toMine',(req,res)=>{
   res.render('mine',{
     title :'个人简介'
@@ -80,26 +65,6 @@ app.get('/toAdmin',(res,resp)=> {
     title: '后台管理'
   })
 })
-/*
-app.get('/toUser',(res,resp)=> {
-  resp.render ('user', {
-    title: '后台管理'
-  })
-})*/
-  /*//个人中心
-  app.get('/useInfo',(req,res)=>{
-    res.render('useInfo',{
-      title :'个人中心'
-    })
-  })*/
-
-//--------------业务---------------
-  /*router.post('/',(req,res)=>{
-    //获取前端信息
-    req.body
-    res.json("注册成功");
-  })*/
-
 //获取数据库
   app.get ('/getUser', (req, res) => {
     let sql = `select * from friends`;
@@ -231,48 +196,6 @@ var config = {
     database : config.dataBase.name
   });
   connection.connect ();
-/*// 解决跨域访问
-  app.all ('/', function (req, res, next) {
-    res.setHeader ('Access-Control-Allow-Origin', '*');
-    res.setHeader ('Access-Control-Allow-Methods', 'GET, POST');
-    res.setHeader ('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
-    next ();
-  });*/
-/*
-  app.post ('/', urlencodedParser, function (req, res) {
-    // console.log(req);
-    var name = req.body.name;
-    var password = req.body.password;
-    var data = [password, name];
-    var _res = res;
-    var sql_add = 'INSERT INTO user(id,name,password) VALUES(?,?,?)';//添加数据
-    var sql_select = 'SELECT * FROM user';//查询数据
-    connection.query (sql_select, function (err, result) {
-      if (err) {
-        _res.send (err.message);
-        return;
-      } else {
-        var ta = true;
-        result.forEach (item => {
-          if (item.uuid == password && item.userName == name) {
-            _res.send ('您的账号已被注册，清重新注册！');
-            ta = false;
-            return;
-          }
-        });
-        if (ta) {
-          connection.query (sql_add, data, function (err, result) {
-            if (err) {
-              _res.send (err.message);
-              return;
-            }
-            _res.send ('注册成功；');
-          })
-        }
-      }
-    })
-    res.end ('请求成功');
-  });*/
 //监听服务端端口
   app.listen (3000, () => {
     /*  var host = server.address().address
