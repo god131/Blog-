@@ -31,9 +31,9 @@ app.get ('/getUserMain', (req, res) => {
     tltle: '我的朋友'
   })
 })
-app.get ('/index2', (req, res) => {
-  res.render ('index2', {
-    tltle: '管理员页面'
+app.get('/toMine',(req,res)=>{
+  res.render('mine',{
+    title :'个人简介'
   })
 })
 //登入界面
@@ -42,11 +42,7 @@ app.get('/', (req, res) =>{
     title:"登入界面"
   })
 })
-app.get('/toMine',(req,res)=>{
-  res.render('mine',{
-    title :'个人简介'
-  })
-})
+
 //评论回复
 app.get('/toSpeak',(req,res)=>{
   res.render('speak',{
@@ -188,14 +184,7 @@ var config = {
       "name": "demo"
   }
 }
-  var connection = mysql.createConnection ({
-    host     : config.dataBase.server,
-    port     : config.dataBase.port,
-    user     : config.dataBase.user,
-    password : config.dataBase.password,
-    database : config.dataBase.name
-  });
-  connection.connect ();
+
 //监听服务端端口
   app.listen (3000, () => {
     /*  var host = server.address().address
