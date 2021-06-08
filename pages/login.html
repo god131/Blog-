@@ -1,4 +1,10 @@
 <% include header.html%>
+<style>
+    input {
+        border-radius: 5px;
+        background-color: skyblue;
+    }
+</style>
     <div class="login">
         <div class="box">
             <h2>用户登录</h2>
@@ -12,6 +18,7 @@
                     <label>密码</label>
                 </div>
                 <input type="button" onclick="denglu()" name="" value="登录">
+                <a href='/toRegister'>没有账号?点此注册</a>
             </form>
         </div>
     </div>
