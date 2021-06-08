@@ -1,4 +1,4 @@
-<!--<% include header.html%>-->
+<% include header.html%>
 <style>
     input {
         border-radius: 5px;
@@ -10,27 +10,25 @@
         font-color: royalblue;
     }
 </style>
-    <div class="login">
-        <div class="box">
-            <h2>用户登录</h2>
-            <form>
-                <div class="inputBox">
-                    <input id="userName" type="text" name="" required="">
-                    <label>用户名</label>
-                </div>
-                <div class="inputBox">
-                    <input id="password" type="password" name="" required="">
-                    <label>密码</label>
-                </div>
-                <input type="button" onclick="denglu()" name="" value="登录">
-                <a href='/toRegister'>没有账号?点此注册</a>
-            </form>
-        </div>
+<div class="login">
+    <div class="box">
+        <h2>用户登录</h2>
+        <form>
+            <div class="inputBox">
+                <input id="userName" type="text" name="" required="">
+                <label>用户名</label>
+            </div>
+            <div class="inputBox">
+                <input id="password" type="password" name="" required="">
+                <label>密码</label>
+            </div>
+            <input type="button" onclick="denglu()" name="" value="登录">
+        </form>
     </div>
+</div>
     <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
     <script>
-
-        function denglu () {
+       function denglu () {
           var username = $('#userName').val()
           var password = $('#password').val()
             $.ajax({
@@ -40,10 +38,14 @@
                     console.log(res);
                     if (res.length > 0) {
                         alert('登录成功!')
-                        window.location.href="/"
+                        window.location.href="/index"
+                    }else{
+                      alert("登录失败,用户名或密码错误")
                     }
                 }
             })
         }
+
+
     </script>
 <% include footer.html%>

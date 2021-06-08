@@ -24,29 +24,39 @@ app.set('view engine','html');
 
 
 //发送get请求
-app.get('/',(res,resp)=>{
+app.get('/index',(res,resp)=>{
   resp.render('index',{
     title:'首页'
   })
- /* util.read('pages/index.html')
-  .then(res=>{
-    resp.write(res)
-    resp.end()
-  })*/
 })
 app.get ('/getUserMain', (req, res) => {
   res.render ('Data', {
     tltle: '我的朋友'
   })
 })
+app.get ('/index2', (req, res) => {
+  res.render ('index2', {
+    tltle: '管理员页面'
+  })
+})
 //登入界面
-app.get('/toLogin', (req, res) =>{
+app.get('/', (req, res) =>{
   res.render('login',{
     title:"登入界面"
   })
-  /*const data = await util.read('pages/login.html')
-  resp.end(data)*/
 })
+
+/*app.post('/index', (req, res)=>{
+  var sql = 'SELECT * FROM user where username  = '+req.body.username+'and password = '+req.body.password+''
+  connection.query(sql,function (err, result) {
+    if(err){
+      console.log('[SELECT ERROR] - ',err.message);
+      return;
+    }else {
+        res.json({"s":1})
+    }
+  })
+})*/
 app.get('/toMine',(req,res)=>{
   res.render('mine',{
     title :'个人简介'
