@@ -1,4 +1,4 @@
-<% include header.html%>
+<!--<% include header.html%>-->
 <style>
     * {
         margin: 0;
@@ -23,7 +23,9 @@
         height: 100%;
         flex-direction: column;
     }
-
+    .toLogin{
+        font-color: royalblue;
+    }
     #loginDiv {
         width: 468px;
         display: flex;
@@ -153,7 +155,7 @@
         <input type="button" class="button" onblur="checkForm()" onclick='tijiao()'value="提交">
         <input type="reset" class="button" value="重置">
         </p>
-        <a href='/toLogin'>已有账号?点此登录</a>
+        <a href='/toLogin' class="toLogin">已有账号?点此登录</a>
     </form>
 </div>
 </body>
