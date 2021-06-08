@@ -102,6 +102,7 @@
         font-weight: initial;
     }
 </style>
+<body>
 <div id="loginDiv">
     <form action="/register" method="post">
         <h1>注册</h1>
@@ -154,7 +155,6 @@
         </p>
     </form>
 </div>
-
 </body>
 <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
 <script type="text/javascript">
@@ -169,7 +169,6 @@
             if (sexNum[i].checked) {
                 sex = sexNum[i];
             }
-
         }
         if (sex == "") {
             trip("sex_trip", "ERROR!!");
@@ -214,7 +213,7 @@
         checkSex();
 
         var trip = document.getElementsByName("em");
-        var tripV = trip.innerHTML();
+        var tripv = trip.innerHTML();
 
         //获取用户名输入项
         var userName = document.getElementById("userName");
@@ -268,7 +267,7 @@
         return true;
     }
 
-    function submitT() {
+    function submit() {
         if (checkForm()) {
             return true;
         } else {

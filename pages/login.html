@@ -4,7 +4,7 @@
             <h2>用户登录</h2>
             <form>
                 <div class="inputBox">
-                    <input id="userNname" type="text" name="" required="">
+                    <input id="userName" type="text" name="" required="">
                     <label>用户名</label>
                 </div>
                 <div class="inputBox">
@@ -17,14 +17,18 @@
     </div>
     <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
     <script>
+
         function denglu () {
+          var username = $('#userName').val()
+          var password = $('#password').val()
             $.ajax({
                 type: 'get',
-                url: '/login?userNname=' + document.querySelector('#userNname').value + '&password=' + document.querySelector('#password').value,
+                url: '/login?username=' + username + '&password=' + password,
                 success: function (res) {
+                    console.log(res);
                     if (res.length > 0) {
                         alert('登录成功!')
-                        window.location.href="/toAdmin"
+                        window.location.href="/"
                     }
                 }
             })

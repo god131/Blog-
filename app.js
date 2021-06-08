@@ -123,9 +123,11 @@ app.get ('/getUser2', (req, res) => {
   })
   // 登录
   app.get ('/login', (req, res) => {
+    console.log(req.query)
     const sql = `select * from user WHERE username = '${req.query.username}' and password = '${req.query.password}'`
     console.log(sql)
     db (sql, null,).then (res1 => {
+      console.log(res1)
       res.send (res1)
     })
   })
@@ -267,7 +269,7 @@ var config = {
       var port = server.address().port*/
     console.log ('server is start');
   })
-
+module.exports=app;
 
 
 
