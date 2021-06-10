@@ -213,6 +213,7 @@
             type: 'get',
             url: `/addInfo?name=${valueList[0].value}&sex=${valueList[1].value}&birthday=${encodeURI(valueList[2].value)}&type=${encodeURI(valueList[3].value)}`,
             success: function (res) {
+                console.log (res)
                 getData()
                 alert('添加成功')
             }

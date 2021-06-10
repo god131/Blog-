@@ -108,11 +108,11 @@
 <div id="loginDiv">
     <form action="/register" method="post">
         <h1>注册</h1>
-        <p>用户姓名:<input id="userName" type="text" autofocus required><label id="name_trip"></label></p>
+        <p>用户姓名:<input id="userName" type="text" onblur="checkName()" autofocus required><label id="name_trip"></label></p>
 
         <p>用户密码:<input id="password" type="password" required><label id="password_trip"></label></p>
 
-        <p>确认密码:<input id="surePassword" type="password" required><label id="surePassword_trip"></label></p>
+        <p>确认密码:<input id="repassword" type="password" onblur="" required><label id="surePassword_trip"></label></p>
 
                     <p>
                         用户类型:
@@ -143,7 +143,7 @@
                     </p>
                     <p>
                         电子邮件:
-                        <input id="email" type="email" required>
+                        <input id="email" type="email" onblur="checkEmail()" required>
                         <label id="emil_trip"></label>
                     </p>
                     <p> 自我介绍:</p>
@@ -155,7 +155,7 @@
         <input type="button" class="button" onblur="checkForm()" onclick='tijiao()'value="提交">
         <input type="reset" class="button" value="重置">
         </p>
-        <a href='/toLogin' class="toLogin">已有账号?点此登录</a>
+        <a href='/' class="toLogin">已有账号?点此登录</a>
     </form>
 </div>
 </body>
@@ -164,7 +164,21 @@
     function trip(obj, trip) {
         document.getElementById(obj).innerHTML = "<b>" + trip + "</b>";
     }
-
+    //对name进行验证
+    function checkName(name){
+      if(name!=""){
+        removeClass(ele.name,"borderRed");
+        x = "请输入6-12位密码！";
+        document.getElementById("tips").style.display = "inherit";
+        return true;
+      }else{
+        addClass(ele.name,"borderRed");
+        x = "对不起，用户名为空！";
+        document.getElementById("tips").style.display = "inherit";
+        //显示错误提示。
+        return false;
+      }
+    }
     function checkSex() {
         var sexNum = document.getElementsByName("sex");
         var sex = "";
@@ -211,69 +225,13 @@
     }
 
     function checkForm() {
-        checkSelect();
-        checkHobby();
-        checkSex();
-
-        var trip = document.getElementsByName("em");
-        var tripv = trip.innerHTML();
-
-        //获取用户名输入项
-        var userName = document.getElementById("userName");
-        var uName = userName.value;
-        if (uName.length < 1 || uName.length > 10) {
-            trip("name_trip", "账号长度为1-10位!!");
-            return false;
-        } else {
-            trip("name_trip", "OK!!");
-
-        }
-
-/*
-        //密码长度大于6 和确认必须一致
-        var password = document.getElementById("password");
-        var userPass = password.value;
-        if (userPass.length < 6) {
-            trip("password_trip", "密码要>6位!!");
-            return false;
-        } else {
-            trip("password_trip", "OK!!");
-        }
-
-        //获取确认密码框的值 var
-        var surePassword = document.getElementById("surePassword");
-        var surePass = surePassword.value;
-        if (userPass != surePass) {
-            trip("surePassword_trip", "两次密码不一致!!");
-            return false;
-        }
-*/
-/*
-
-        //校验邮箱:/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
-        var inputEmail = document.getElementById("email");
-        var uEmail = inputEmail.value;
-        if (!/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/.test(uEmail)) {
-            trip("emil_trip", "邮箱不合法!!");
-            return false;
-        } else {
-            trip("emil_trip", "OK!!");
-        }
-*/
-
-
-        // 校验自我介绍
-        var introduceText = document.getElementById("introduceText");
-        var introduce = introduceText.value;
-        if (introduce.length < 3 || uName.length > 50) {
-            trip("introduce_trip", "长度为3-50字!!");
-            return false;
-        } else {
-            trip("introduce_trip", "OK!!");
-        }
-
-        return true;
+      checkSelect ();
+      checkHobby ();
+      checkSex ();
+      checkPassword(password,repassword);
+      checkName(name);
     }
+
 
 
     function submit() {
@@ -283,7 +241,49 @@
             return false;
         }
     }
+    $('#userName').on('blur', function () {
+      var userName = $('#userName').val()
+      console.log (userName)
+      var userNameReg = /^.{3,20}$/
+      if (userNameReg.test(userName)) {
+        $('#name_trip').html('恭喜您! 用户名验证通过!')
+      } else {
+        $('#name_trip').html('用户名验证失败!')
+      }
+    })
+
+    $('#password').on('blur', function () {
+      var password = $('#password').val()
+      var userNameReg = /^[a-zA-Z]\w{5,17}$/
+      if (userNameReg.test(password)) {
+        $('#password_trip').html('恭喜您! 密码验证通过!')
+      } else {
+        $('#password_trip').html('密码验证失败!')
+      }
+    })
+
+    $('#email').on('blur', function () {
+      var email = $('#email').val()
+      var emailReg = /^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+      if (emailReg.test(email)) {
+        $('#emil_trip').html('恭喜您! 邮箱验证通过!')
+      } else {
+        $('#emil_trip').html('邮箱验证失败!')
+      }
+    })
+
+    $('#repassword').on('blur', function () {
+      var repassword = $('#repassword').val()
+      var password = $('#password').val()
+      if (repassword.trim() !== password ) {
+        $('#surePassword_trip').html('两次密码输入不一致,请重新输入')
+      } else {
+        $('#surePassword_trip').html('两次密码输入一致!')
+      }
+    })
     function tijiao () {
+
+
         $.ajax({
             type: 'get',
             url: '/register?userName=' + document.querySelector('#userName').value + '&password=' + document.querySelector('#password').value,

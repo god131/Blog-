@@ -65,7 +65,7 @@ app.get('/toAdmin',(res,resp)=> {
   app.get ('/getUser', (req, res) => {
     let sql = `select * from friends`;
 	if (req.query.page) {
-		sql = `select * from friends limit ${(req.query.page - 1) * 10}, 10`;
+		sql = `select * from friends limit ${(req.query.page - 1) * 10}, 20`;
 	}
     console.log (sql)
     db (sql, null,).then (res1 => {
@@ -163,6 +163,7 @@ app.get ('/addInfo', (req, res) => {
   const sql = `INSERT INTO friends (name, sex, birthday, type) VALUES (${decodeURI(req.query.name)}, ${decodeURI(req.query.sex)}, ${decodeURI(req.query.birthday)}, ${decodeURI(req.query.type)});`
   console.log(sql)
   db (sql, null,).then (res1 => {
+    console.log (res1)
     res.send (res1)
   })
 })
