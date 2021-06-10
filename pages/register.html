@@ -229,6 +229,7 @@
 
         }
 
+/*
         //密码长度大于6 和确认必须一致
         var password = document.getElementById("password");
         var userPass = password.value;
@@ -246,6 +247,8 @@
             trip("surePassword_trip", "两次密码不一致!!");
             return false;
         }
+*/
+/*
 
         //校验邮箱:/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
         var inputEmail = document.getElementById("email");
@@ -256,6 +259,8 @@
         } else {
             trip("emil_trip", "OK!!");
         }
+*/
+
 
         // 校验自我介绍
         var introduceText = document.getElementById("introduceText");
@@ -269,6 +274,7 @@
 
         return true;
     }
+
 
     function submit() {
         if (checkForm()) {
@@ -284,7 +290,7 @@
             success: function (res) {
                 console.log(res)
                 alert('注册成功!')
-                window.open("/")
+                window.open("/index")
             }
         })
     }

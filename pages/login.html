@@ -4,12 +4,9 @@
         border-radius: 5px;
         background-color: cornflowerblue;
     }
-    a{
-        font-color: royalblue;
-    }
-    #denglu{
-        weight:30px;
 
+    #denglu{
+        height:40px;
     }
 </style>
 <div class="login">
@@ -26,6 +23,7 @@
             </div>
             <input id="denglu" type="button" onclick="denglu()" name="" value="登录">
         </form>
+        <a href='/toRegister' class="toLogin">没有账号?点此注册</a>
     </div>
 </div>
     <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
@@ -46,7 +44,5 @@
                 }
             })
         }
-
-
     </script>
 <% include footer.html%>
