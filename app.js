@@ -1,9 +1,7 @@
 const express = require('express');
 const {db} = require('./db');
 const app = express();
-/*const util = require('./util');*/
 const user = require('./manage/user');
-/*const blog = require('./manage/blog');*/
 const path = require('path');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
@@ -34,6 +32,11 @@ app.get ('/getUserMain', (req, res) => {
 app.get('/toMine',(req,res)=>{
   res.render('mine',{
     title :'个人简介'
+  })
+})
+app.get('/toHobby',(req,res)=>{
+  res.render('hobby',{
+    title :'个人爱好'
   })
 })
 //登入界面
