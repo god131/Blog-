@@ -65,7 +65,7 @@ app.get('/toAdmin',(res,resp)=> {
   app.get ('/getUser', (req, res) => {
     let sql = `select * from friends`;
 	if (req.query.page) {
-		sql = `select * from friends limit ${(req.query.page - 1) * 10}, 20`;
+		sql = `select * from friends limit ${(req.query.page - 1) * 10}, 10`;
 	}
     console.log (sql)
     db (sql, null,).then (res1 => {
