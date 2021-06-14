@@ -6,6 +6,10 @@ const path = require('path');
 var bodyParser = require('body-parser');
 var mysql = require('mysql');
 
+process.on('unhandledRejection', error => {
+  console.log ('unhandledRejection', error)
+})
+
 
 app.use('/static',express.static(__dirname+'/static'));
 //引入ejs
@@ -163,7 +167,8 @@ app.get ('/saveInfo2', (req, res) => {
 })
 
 app.get ('/addInfo', (req, res) => {
-  const sql = `INSERT INTO friends (name, sex, birthday, type) VALUES (${decodeURI(req.query.name)}, ${decodeURI(req.query.sex)}, ${decodeURI(req.query.birthday)}, ${decodeURI(req.query.type)});`
+  console.log (req.query)
+  const sql = `INSERT INTO friends (name,sex,birthday,type) VALUES ('${decodeURI(''+req.query.name)}','${decodeURI(''+req.query.sex)}','${decodeURI(''+req.query.birthday)}','${decodeURI(''+req.query.type)}')`
   console.log(sql)
   db (sql, null,).then (res1 => {
     console.log (res1)
@@ -172,7 +177,7 @@ app.get ('/addInfo', (req, res) => {
 })
 
 app.get ('/addInfo2', (req, res) => {
-  const sql = `INSERT INTO user (username, password) VALUES (${decodeURI(req.query.username)}, ${decodeURI(req.query.password)});`
+  const sql = `INSERT INTO user (username, password) VALUES ('${decodeURI(req.query.username)}', '${decodeURI(req.query.password)}');`
   console.log(sql)
   db (sql, null,).then (res1 => {
     res.send (res1)
@@ -191,8 +196,6 @@ var config = {
 
 //监听服务端端口
   app.listen (3000, () => {
-    /*  var host = server.address().address
-      var port = server.address().port*/
     console.log ('server is start');
   })
 module.exports=app;
