@@ -3,8 +3,8 @@ const {db} = require('./db');
 const app = express();
 const user = require('./manage/user');
 const path = require('path');
-var bodyParser = require('body-parser');
-var mysql = require('mysql');
+/*var bodyParser = require('body-parser');
+var mysql = require('mysql');*/
 
 process.on('unhandledRejection', error => {
   console.log ('unhandledRejection', error)
